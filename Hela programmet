@@ -155,7 +155,7 @@ def door():
             continue
 
 spelare_namn = input("välje ett namn -> ") 
-Gamer_attribute = spelare(spelare_namn, 50, 50, 9,[], 0, 1)
+Gamer_attribute = spelare(spelare_namn, 50, 50, 0,[], 0, 1)
 
 while Gamer_attribute.hp>0 and Gamer_attribute.lvl < 10:
     choice = input(""" \nvad vill du göra
