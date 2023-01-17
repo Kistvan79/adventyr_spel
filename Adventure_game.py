@@ -7,18 +7,18 @@ class Fiende():
     def __init__(self, monster_namn, monster_styrka):
         self.namn = monster_namn
         self.styrka = monster_styrka
-        self.hp = rand.randint(20,30)
+        self.hp = round(rand.randint(20,30))
             
 class Cockroach_type(Fiende):
     def __init__(self, monster_namn, monster_styrka):
         super().__init__(monster_namn, monster_styrka)
-        self.hp = rand.randint(21,40)
+        self.hp = round(rand.randint(21,40))
 
     
 class Sheep_type(Fiende):
     def __init__(self, monster_namn, monster_styrka):
         super().__init__(monster_namn, monster_styrka)
-        self.hp = rand.randint(10,19)
+        self.hp = round(rand.randint(10,19))
 
 
 class item_attribut():
@@ -84,9 +84,9 @@ class Scoreboard(Spelare):
         super().__init__(namn, strength, hp, lvl, inventory, exp, exp_multi)
     
     def board(self):
-        print(f"""SCOREBOARD
+        print(f"""               SCOREBOARD
                 STRENGTH    HEALTH POINTS   LEVEL   TIME
-{spelare.namn}: {spelare.strength}    {spelare.hp}     {spelare.lvl}  """)
+{spelare.namn}:         {spelare.strength}          {spelare.hp}            {spelare.lvl}  """)
       
 
 def manadge_items():# en funktion som hanterar spelarens föremål 
