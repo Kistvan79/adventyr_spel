@@ -1,6 +1,6 @@
 import random as rand
 import time
-import threading
+
 
 # Här uppe ligger alla våra classer och deras egenskaper
 
