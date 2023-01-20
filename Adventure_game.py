@@ -222,7 +222,7 @@ roaches = Cockroach_type("Roach", rand.randint(0,9), 1)
 sheep = Sheep_type("Sheep", rand.randint(5,12), 1)
 fiende = Fiende("Bertil", rand.randint(6,9), 1)
 spelare = Spelare("", 10, 1, 1,[], 0, 1)
-scoreboard = Scoreboard(spelare.namn, spelare.strength, spelare.hp, spelare.lvl, spelare.inventory, spelare.exp, spelare.exp_multi)
+
 
 # Huvud program
 spelare.intro()
