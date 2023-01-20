@@ -221,7 +221,7 @@ def door():
 roaches = Cockroach_type("Roach", rand.randint(0,9), 1)
 sheep = Sheep_type("Sheep", rand.randint(5,12), 1)
 fiende = Fiende("Bertil", rand.randint(6,9), 1)
-spelare = Spelare("", 10, 1, 1,[], 0, 1)
+spelare = Spelare("", 10, 100, 1,[], 0, 1)
 
 
 # Huvud program
