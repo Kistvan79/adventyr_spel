@@ -1,5 +1,6 @@
 import random as rand
 import time
+import threading
 # Välkomen :D
 # Här uppe ligger alla våra classer och deras egenskaper
 
@@ -7,18 +8,18 @@ class Fiende():
     def __init__(self, monster_namn, monster_styrka):
         self.namn = monster_namn
         self.styrka = monster_styrka
-        self.hp = round(rand.randint(20,30))
+        self.hp = rand.randint(20,30)
             
 class Cockroach_type(Fiende):
     def __init__(self, monster_namn, monster_styrka):
         super().__init__(monster_namn, monster_styrka)
-        self.hp = round(rand.randint(21,40))
+        self.hp = rand.randint(21,40)
 
     
 class Sheep_type(Fiende):
     def __init__(self, monster_namn, monster_styrka):
         super().__init__(monster_namn, monster_styrka)
-        self.hp = round(rand.randint(10,19))
+        self.hp = rand.randint(10,19)
 
 
 class item_attribut():
@@ -49,7 +50,10 @@ class Spelare():
         count = 1
         for föremål in self.inventory:
             print(f"{count}.",föremål.Type,"DMG:",föremål.dmg,)
-            if föremål in count(6):
+            if föremål in self.inventory == 5:
+                print("\n Du har blivit DPS Gud! \n + 30 HP")
+                self.hp += 30
+            if count == 6:
                 print(f"Item från kista - {föremål.Type} DMG: {föremål.dmg} ")
             time.sleep(0.25)
             count +=1
@@ -140,7 +144,11 @@ def combat(): # Är combat systemet
     random_fiende.hp = rand.uniform(random_fiende.hp,random_fiende.hp*spelare.exp_multi)
     print(f"\n Striden har börjat! {spelare.namn} vs {random_fiende.namn}")
     while spelare.hp > 0 or random_fiende.hp: # random_fiende sätts in i en loop för att sloss för sitt liv
-        input("Tryck enter för att sloss ")
+        if input("\nTryck enter för att sloss ") == "":
+            pass
+        else:
+            print("Som sagt, tryck enter för att sloss")
+            continue
         time.sleep(0.5)
         fiende.styrka = round(rand.uniform(9,11*spelare.exp_multi))
         sheep.styrka = round(rand.uniform(5,10*spelare.exp_multi))
@@ -150,7 +158,7 @@ def combat(): # Är combat systemet
         spelare.hp -= random_fiende.styrka
         print(f"\n{random_fiende.namn} dealt: {random_fiende.styrka}        {spelare.namn} dealt: {spelare.strength} ")
     
-        print(f"""{random_fiende.namn}'s HP = {random_fiende.hp}       {spelare.namn}'s HP = {spelare.hp} """)
+        print(f"""{random_fiende.namn}'s HP = {round(random_fiende.hp)}       {spelare.namn}'s HP = {spelare.hp} """)
         if spelare.hp <= 0:
             print("\nDu förlora striden!")
             break
@@ -201,6 +209,18 @@ def door():
         else:
             print("\nDet fins bara tre dörrar!")
             continue
+
+def timer():
+    count = 0
+    while True:
+        time.sleep(1)
+        count += 1
+        if spelare.hp <= 0 or spelare.lvl == 10:
+            print("Time played: ", count//60 ," minutes", count, "seconds")
+
+            break
+
+
 # Object för classerna
 
 roaches = Cockroach_type("Roach", rand.randint(0,9))
@@ -209,6 +229,8 @@ fiende = Fiende("Bertil", rand.randint(6,9))
 spelare = Spelare("", 10, 50, 1,[], 0, 1)
 scoreboard = Scoreboard(spelare.namn, spelare.strength, spelare.hp, spelare.lvl, spelare.inventory, spelare.exp, spelare.exp_multi)
 spelare.intro()
+timer_thread = threading.Thread(target=timer, daemon=True)
+timer_thread.start()
 
 
 # Huvud program
@@ -230,5 +252,4 @@ if spelare.lvl == 10:
     print("DU VANN!")
 else:
     print("GAME OVER :(")
-
-scoreboard.board()
+scoreboard.board() #Work in progress
